@@ -1,0 +1,21 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo%}
+    <h1 class="mb-5"> Busqueda de Articulos</h1>
+{% endblock %} 
+
+{% block contenido_que_cambia %}
+
+<form action="{% url 'buscandoEstudiante' %}" method="GET"> 
+    {{ form }}
+    {% csrf_token %}
+
+    <input type="text" name="nombre" id="nombre" placeholder="Inserte nombre del articulo">
+    <input type="submit" value="Buscar">
+            
+</form>
+
+
+{% endblock %}

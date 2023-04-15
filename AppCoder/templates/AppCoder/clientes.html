@@ -1,0 +1,56 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block titulo%}
+    <h1>Página de Clientes</h1>
+{% endblock %} 
+
+{% block contenido_que_cambia %}
+
+<h1> Crear nuevo Cliente </h1>  <!-- Ver como agregar al nombre de usuario-->
+
+<form action="" method="post"> 
+    {{ form }}
+    {% csrf_token %}
+
+    <input type="submit" value="Agregar">
+            
+</form>
+<table> 
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> Nombre </th>
+            <th>Apellido </th>
+            <th> Email </th>
+            <th>Contrasena </th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        {% for cliente in clientes %}
+        <tr>
+            <td>
+                {{ cliente.id }}
+            </td>
+            <td>
+                {{ cliente.nombre }}
+            </td>
+            <td>
+                {{ cliente.apellido }}
+            </td>
+            <td>
+                {{ cliente.email }}
+            </td>
+            <td>
+                {{ cliente.profesion }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+{% endblock %}

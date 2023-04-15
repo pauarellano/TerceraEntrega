@@ -1,0 +1,48 @@
+{% extends "AppCoder/padre.html" %}
+{% load static %}
+
+{% block titulo%}
+    <h1>Articulos en tu Carrito</h1>
+{% endblock %} 
+
+{% block contenido_que_cambia %}
+<h1> Agregar articulos a tu carrito</h1>
+
+<form action="" method="post"> 
+    {{ form }}
+    {% csrf_token %}
+
+    <input type="submit" value="Agregar">
+            
+</form>
+<table> 
+    <thead>
+        <tr>
+            <th> ID </th>
+            <th> Nombre </th>
+            <th>Cantidad </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+       
+        {% for articulo in carrito %}
+        <tr>
+            <td>
+                {{ articulo.id }}
+            </td>
+            <td>
+                {{ articulo.nombre }}
+            </td>
+            <td>
+                {{ articulo.cantidad }}
+            </td>
+           
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}
