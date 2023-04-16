@@ -16,23 +16,28 @@ def inicio(request):
     return render(request,'AppCoder/inicio.html')
 
 def articulos (request):
+
     if request.method=="POST":
-        form=ArticuloFormulario(request.POST)
+        form= ArticuloFormulario(request.POST)
 
         if form.is_valid():
             nombre=form.cleaned_data["nombre"]
             cantidad=form.cleaned_data["cantidad"]
-            articulo=Articulo()
-            articulo.nombre=nombre
+            articulo=Articulo() 
+            articulo.nombre=nombre 
             articulo.cantidad=cantidad
-            articulo.save()
-            form=ArticuloFormulario()
-            return render (request,"AppCoder/articulos.html")
+            articulo.save() 
+            form=ArticuloFormulario() 
+           
+        
+       
     else:
-        form=ArticuloFormulario()
-        articulos=Articulo.objects.all
-        context={"articulos":articulos, "form":form}
-        return render (request,"AppCoder/articulos.html",context)
+        form=ArticuloFormulario() 
+
+    articulos=Articulo.objects.all() 
+    context={"articulos":articulos,"form":form} 
+
+    return render (request,"Appcoder/articulos.html",context)
 
 def clientes (request):
 
@@ -51,13 +56,13 @@ def clientes (request):
             cliente.contrasena=contrasena
             cliente.save() 
             form=ClienteFormulario() 
-            return render (request,"AppCoder/clientes.html")
+           
         
        
     else:
         form=ClienteFormulario() 
 
-    clientes=Cliente.objects.all 
+    clientes=Cliente.objects.all() 
     context={"clientes":clientes,"form":form} 
 
     return render (request,"Appcoder/clientes.html",context)
@@ -69,16 +74,30 @@ def carrito (request):
         if form.is_valid():
             nombre=form.cleaned_data["nombre"]
             cantidad=form.cleaned_data["cantidad"]
-            carrito1=Carrito()
-            carrito1.nombre=nombre
-            carrito1.cantidad=cantidad
-            carrito1.save()
+            carrito=Carrito()
+            carrito.nombre=nombre
+            carrito.cantidad=cantidad
+            carrito.save()
             form=CarritoFormulario()
-            return render (request,"AppCoder/carrito.html")
+            
+        else:
+            pass
+
     else:
-
         form=CarritoFormulario()
+        carritos=Carrito.objects.all()
+        context={"articulos":carritos, "form":form}
+        return render (request,"AppCoder/carrito.html",context)
 
-    carrito1=Carrito.objects.all
-    context={"carritos":carrito1, "form":form}
-    return render (request,"AppCoder/carrito.html",context)
+
+def buscarArticulo(request):
+    return render(request, "AppCoder/busquedaArticulos.html")
+
+def buscandoArticulo(request):
+    articuloIngresado= request.GET["nombre"]
+    if articuloIngresado!="":
+        articulos=Articulo.objects.filter(nombre__icontains=articuloIngresado) #nombre==articuloIngresado
+        print(articulos)
+        return render(request, "AppCoder/resultadosBusquedaArticulos.html", {"articulos": articulos})
+    else:
+        return render(request, "AppCoder/busquedaArticulos.html", {"mensaje": "No se ingreso el nombre del artículo"})

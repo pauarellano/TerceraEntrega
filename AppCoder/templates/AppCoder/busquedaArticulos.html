@@ -8,10 +8,9 @@
 
 {% block contenido_que_cambia %}
 
-<form action="{% url 'buscandoEstudiante' %}" method="GET"> 
-    {{ form }}
-    {% csrf_token %}
-
+<h3>{{ mensaje }}</h3>
+<form action="{% url 'buscandoArticulo' %}" method="GET"> 
+    
     <input type="text" name="nombre" id="nombre" placeholder="Inserte nombre del articulo">
     <input type="submit" value="Buscar">
             

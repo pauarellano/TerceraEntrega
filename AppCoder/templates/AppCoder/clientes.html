@@ -10,7 +10,7 @@
 <h1> Crear nuevo Cliente </h1>  <!-- Ver como agregar al nombre de usuario-->
 
 <form action="" method="post"> 
-    {{ form }}
+    {{ form.as_table }}
     {% csrf_token %}
 
     <input type="submit" value="Agregar">
